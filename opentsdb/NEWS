@@ -1,0 +1,132 @@
+OpenTSDB - User visible changes.
+
+* Version 2.0.1 (2014-11-09)
+
+Bug Fixes:
+  - Fix tree REST endpoint to allow modification of the strictMatch and storeFailure fields
+  - Fix compacted millisecond columns throwing an error during fsck
+  - Fix tsd startup directory permission checks
+  - Fix thread safety of pending UID assignment when they are complete
+  - Fix compaction queue flushing on tsd shutdown
+  - Fix RTPublisher plugin floating point value detection where it was previously posting to the wrong method
+  - Fix TsdbQuery.toString() to avoid looing up UIDs if an error was thrown as this can cause cause a deadlock
+
+Noteworthy changes:
+  - Add Travis CI build support
+  - Update to Asynchbase 1.6.0 and update additional dependencies
+  - Modify scripts to allow easier compilation under FreeBSD
+
+* Version 2.0.0 (2014-05-5)
+
+API incompatible changes:
+  - The `TSDB' class now takes a `Config' object in argument instead of an
+    HBaseClient and two strings.
+  - The downsampling interval for the method `Query.downsample' went from
+    being an `int' to a `long'.
+
+Noteworthy changes:
+  - Configuration can be provided in a properties file
+  - New Jackson JSON helper class
+  - GnuPlot batch file for Windows compatability
+  - Add relative time option "n" for 30 days
+  - Relative, unix epoch style timestamps work in CliQuery
+  - New "max" parameter for /suggest that can fetch more than the default 25 
+    results. If not supplied, default is used
+  - New formalized HTTP API, deprecates many of the old HTTP API calls but it
+    is still backwards compatible
+  - New store data points over HTTP via JSON
+  - New annotations for recording meta data along with data points in a time
+    series
+  - New global annotations to record meta data at a specific time but not
+    associated with a specific series
+  - New meta data for metrics, tag names, tag values and time series
+  - New optional chunked encoding support for HTTP requests, configurable
+  - Millisecond resolution support for writing data points and annotations
+  - Variable length encoding for integer data points, any where from 1 to 8
+    bytes instead of using 8 bytes for every point
+  - CORs support for the HTTP API
+  - New data injest plugin framework allowing support for different data
+    formats
+  - Search plugin framework to push meta data to a search engine for access
+  - Real-Time publisher framework to publish data points to a secondary system
+    as soon as they are received at the TSD
+  - New aggregation functions with alternatives to interpolation including:
+    - zero if missing sum: returns a 0 if a data point doesn't exist
+    - max if missing min: returns the maximum value if a data point is missing
+    - min if missing max: returns the minimum value if a data point is missing
+  - New TSUID tracking that writes a counter to a new table to track the 
+    different time series stored and how many data points were written
+  - New meta data trees that allow for flattening time series into a 
+    heirarchical representation similar to a file system
+  - New meta and tree synchronization CLI tools
+  - New statistics showing the number of UIDs used and available for each type
+  - New statistics for the number of current connections to the TSD
+  - New options for working with rate calculations on counters to rollover
+    or reset on anomallys
+  - New Debian package compilable from the source
+  - New RPM package compilable from the source
+
+
+
+* Version 1.1.1 (2013-??-??) [???????]
+
+Noteworthy changes:
+  - UIDs are now assigned in a lock-less fashion.
+
+
+
+* Version 1.1.0 (2013-03-08) [12879d7]
+
+Noteworthy changes:
+  - Licensing adjustment: allow LGPLv2.1+ in addition to LGPLv3+.
+  - Various fixes used when customizing size of UniqueId.  The default size
+    is 3 bytes and is a compile-time constant rarely changed in practice.
+  - New a new standard deviation aggregator, `dev'.
+  - New `fgcolor', `bgcolor' and `smooth' query parameters to /q.
+  - New `tz' query string parameter to allow specifying a custom time zone.
+  - Stop accepting connections when shutting down.
+  - A new `dropcaches' administrative command allows discarding in-memory
+    caches.  Right now these are UID mappings.
+  - Browser history support in the web UI.
+  - Allow "1d-ago" style input in date boxes.
+  - Fix the 30d integer overflow in the web UI.
+  - Add the ability to use mouse for drag-to-zoom on graphs.
+  - Integration with Maven.
+  - Work around a Netty performance bug, increasing write throughput by 10x.
+  - Properly parse floating point values in scientific notations.
+  - Allow tuning the number of worker threads or using OIO.
+  - Fix auto-completion bug causing partial results to show in the web UI.
+  - Various internal bug fixes.
+  - Update all dependencies.
+  - TSDB data compaction is now enabled by default.
+
+
+* Version 1.0.0 (2011-12-23) [66a6b42]
+
+Initial release:
+  - Upload data points through a telnet-style protocol.
+  - HTTP interface to query data in ASCII and PNG.
+  - Efficient, fully asynchronous write path.
+  - Synchronous / blocking read path (to be rewritten).
+  - TSDB data compaction (disabled by default).
+
+-----
+
+Copyright (C) 2011-2012  The OpenTSDB Authors.
+
+This library is free software: you can redistribute it and/or modify it
+under the terms of the GNU Lesser General Public License as published
+by the Free Software Foundation, either version 2.1 of the License, or
+(at your option) any later version.
+
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with this library.  If not, see <http://www.gnu.org/licenses/>.
+
+Local Variables:
+mode: outline
+End:
