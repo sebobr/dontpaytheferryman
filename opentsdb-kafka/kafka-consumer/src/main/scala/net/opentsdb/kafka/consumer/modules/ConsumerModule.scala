@@ -7,8 +7,9 @@ import com.google.inject.name.{Named, Names}
 import java.util.concurrent.{LinkedBlockingQueue, ArrayBlockingQueue}
 import org.hbase.async.HBaseClient
 import net.opentsdb.core.TSDB
+import net.opentsdb.utils.Config
 
-class ConsumerModule(props: Properties) extends AbstractModule with ScalaModule {
+class ConsumerModule(props: Properties, config: Config) extends AbstractModule with ScalaModule {
   def configure() {
     Names.bindProperties(binder(), props)
   }
@@ -23,6 +24,6 @@ class ConsumerModule(props: Properties) extends AbstractModule with ScalaModule 
     client
   }
 
-  @Provides @Singleton def provideTsdbClient(@Named("tsdb.table") tsdbTable: String, @Named("tsdb.uidtable") uidTable: String, client: HBaseClient): TSDB = new TSDB(client, tsdbTable, uidTable)
+  @Provides @Singleton def provideTsdbClient(config:Config, client: HBaseClient): TSDB = new TSDB(client, config)
 
 }

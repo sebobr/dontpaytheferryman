@@ -110,6 +110,32 @@ public final class TSDB {
   /** List of activated RPC plugins */
   private List<RpcPlugin> rpc_plugins = null;
   
+
+  /**
+   * Constructor.
+   * @param client The HBase client to use.
+   * @param timeseries_table The name of the HBase table where time series
+   * data is stored.
+   * @param uniqueids_table The name of the HBase table where the unique IDs
+   * are stored.
+   */
+  public TSDB(final HBaseClient client,
+              final String timeseries_table,
+              final String uniqueids_table) {
+    this.client = client;
+    table = timeseries_table.getBytes();
+
+    final byte[] uidtable = uniqueids_table.getBytes();
+    metrics = new UniqueId(client, uidtable, METRICS_QUAL, METRICS_WIDTH);
+    tag_names = new UniqueId(client, uidtable, TAG_NAME_QUAL, TAG_NAME_WIDTH);
+    tag_values = new UniqueId(client, uidtable, TAG_VALUE_QUAL,
+                              TAG_VALUE_WIDTH);
+    compactionq = new CompactionQueue(this);
+  }
+
+
+
+
   /**
    * Constructor
    * @param config An initialized configuration object

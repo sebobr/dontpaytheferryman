@@ -7,6 +7,11 @@ import com.google.inject.Guice
 import net.opentsdb.kafka.consumer.modules.ConsumerModule
 import net.opentsdb.`client`.netty.modules.TsdbClientModule
 import net.opentsdb.`client`.netty.TsdbClient
+import net.opentsdb.utils.Config
+import net.opentsdb.tools.ArgP
+import net.opentsdb.tools.CliOptions
+
+
 
 class Main {}
 
@@ -15,8 +20,8 @@ object Main {
 
   def main(args: Array[String]) {
     val props = loadProps(new File(args{0}))
-
-    val injector = Guice.createInjector(new ConsumerModule(props))
+    val config = loadConfig(new File(args{0}))
+    val injector = Guice.createInjector(new ConsumerModule(props, config))
 
     logger.info("Starting TSDB Consumer...")
     val consumer = injector.getInstance(classOf[TsdbConsumer])
@@ -43,4 +48,33 @@ object Main {
 
     props
   }
+
+  private def loadConfig(file : File): Config = {
+
+    final ArgP argp = new ArgP()
+    CliOptions.addCommon(argp)
+    argp.addOption("--port", "NUM", "TCP port to listen on.")
+    argp.addOption("--bind", "ADDR", "Address to bind to (default: 0.0.0.0).")
+    argp.addOption("--staticroot", "PATH", "Web root from which to serve static files (/s URLs).")
+    argp.addOption("--cachedir", "PATH", "Directory under which to cache result of requests.")
+    argp.addOption("--worker-threads", "NUM", "Number for async io workers (default: cpu * 2).")
+    argp.addOption("--async-io", "true|false", "Use async NIO (default true) or traditional blocking io")
+    argp.addOption("--backlog", "NUM","Size of connection attempt queue (default: 3072 or kernel" + " somaxconn.")
+    argp.addOption("--flush-interval", "MSEC", "Maximum time for which a new data point can be buffered" + " (default: " + DEFAULT_FLUSH_INTERVAL + ").")
+    CliOptions.addAutoMetricFlag(argp);
+    args = CliOptions.parse(argp, args);
+    args = null;
+
+
+    Config config = CliOptions.getConfig(argp);
+
+    config
+
+  }
+
+
+
+
+
+
 }
