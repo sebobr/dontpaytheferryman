@@ -61,12 +61,12 @@ object Main {
     argp.addOption("--async-io", "true|false", "Use async NIO (default true) or traditional blocking io")
     argp.addOption("--backlog", "NUM","Size of connection attempt queue (default: 3072 or kernel" + " somaxconn.")
     argp.addOption("--flush-interval", "MSEC", "Maximum time for which a new data point can be buffered" + " (default: " + DEFAULT_FLUSH_INTERVAL + ").")
-    CliOptions.addAutoMetricFlag(argp);
-    args = CliOptions.parse(argp, args);
-    args = null;
+    CliOptions.addAutoMetricFlag(argp)
+    args = CliOptions.parse(argp, args)
+    args = null
 
 
-    Config config = CliOptions.getConfig(argp);
+    Config config = CliOptions.getConfig(argp)
 
     config
 

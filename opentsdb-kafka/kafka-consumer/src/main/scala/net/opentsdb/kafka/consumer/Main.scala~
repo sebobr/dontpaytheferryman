@@ -20,8 +20,8 @@ object Main {
 
   def main(args: Array[String]) {
     val props = loadProps(new File(args{0}))
-
-    val injector = Guice.createInjector(new ConsumerModule(props))
+    val config = loadConfig(new File(args{0}))
+    val injector = Guice.createInjector(new ConsumerModule(props, config))
 
     logger.info("Starting TSDB Consumer...")
     val consumer = injector.getInstance(classOf[TsdbConsumer])
