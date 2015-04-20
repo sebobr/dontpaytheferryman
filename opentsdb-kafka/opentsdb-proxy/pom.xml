@@ -33,7 +33,7 @@
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>opentsdb-client</artifactId>
+      <artifactId>client</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
