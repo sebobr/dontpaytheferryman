@@ -26,7 +26,7 @@ import org.jboss.netty.logging.InternalLoggerFactory;
 import org.jboss.netty.logging.Slf4JLoggerFactory;
 
 /** Helper functions to parse arguments passed to {@code main}.  */
-final class CliOptions {
+public final class CliOptions {
 
   static {
     InternalLoggerFactory.setDefaultFactory(new Slf4JLoggerFactory());
