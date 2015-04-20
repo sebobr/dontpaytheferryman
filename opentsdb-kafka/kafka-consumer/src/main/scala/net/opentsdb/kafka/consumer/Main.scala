@@ -50,7 +50,7 @@ object Main {
   }
 
   private def loadConfig(file : File): Config = {
-
+    var DEFAULT_FLUSH_INTERVAL : short = 1000
     var argp = new ArgP()
     CliOptions.addCommon(argp)
     argp.addOption("--port", "NUM", "TCP port to listen on.")
@@ -62,11 +62,11 @@ object Main {
     argp.addOption("--backlog", "NUM","Size of connection attempt queue (default: 3072 or kernel" + " somaxconn.")
     argp.addOption("--flush-interval", "MSEC", "Maximum time for which a new data point can be buffered" + " (default: " + DEFAULT_FLUSH_INTERVAL + ").")
     CliOptions.addAutoMetricFlag(argp)
-    args = CliOptions.parse(argp, args)
-    args = null
+    var temporaryArgs = CliOptions.parse(argp, file)
+    
 
 
-    Config config = CliOptions.getConfig(argp)
+    var config = CliOptions.getConfig(argp)
 
     config
 
