@@ -51,7 +51,7 @@ object Main {
 
   private def loadConfig(file : File): Config = {
 
-    final ArgP argp = new ArgP()
+    var argp = new ArgP()
     CliOptions.addCommon(argp)
     argp.addOption("--port", "NUM", "TCP port to listen on.")
     argp.addOption("--bind", "ADDR", "Address to bind to (default: 0.0.0.0).")
