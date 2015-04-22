@@ -49,7 +49,7 @@ object Main {
     props
   }
 
-  private def loadConfig(file : File): Config = {
+  private def loadConfig(file : File, args : Array[String]): Config = {
     var DEFAULT_FLUSH_INTERVAL = 1000
     var argp = new ArgP()
     CliOptions.addCommon(argp)
