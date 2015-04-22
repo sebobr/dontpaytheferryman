@@ -50,7 +50,7 @@ object Main {
   }
 
   private def loadConfig(file : File): Config = {
-    var DEFAULT_FLUSH_INTERVAL : short = 1000
+    var DEFAULT_FLUSH_INTERVAL = 1000
     var argp = new ArgP()
     CliOptions.addCommon(argp)
     argp.addOption("--port", "NUM", "TCP port to listen on.")
