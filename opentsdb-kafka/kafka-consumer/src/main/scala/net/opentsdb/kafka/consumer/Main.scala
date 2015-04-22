@@ -62,7 +62,7 @@ object Main {
     argp.addOption("--backlog", "NUM","Size of connection attempt queue (default: 3072 or kernel" + " somaxconn.")
     argp.addOption("--flush-interval", "MSEC", "Maximum time for which a new data point can be buffered" + " (default: " + DEFAULT_FLUSH_INTERVAL + ").")
     CliOptions.addAutoMetricFlag(argp)
-    args = CliOptions.parse(argp, args)
+    var arghhhhhhhhh = CliOptions.parse(argp, args)
     
 
 
