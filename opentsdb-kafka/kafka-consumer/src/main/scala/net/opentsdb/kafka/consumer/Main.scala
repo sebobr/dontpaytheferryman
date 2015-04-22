@@ -20,7 +20,7 @@ object Main {
 
   def main(args: Array[String]) {
     val props = loadProps(new File(args{0}))
-    val config = loadConfig(new File(args{0}))
+    val config = loadConfig(new File(args{0}), args)
     val injector = Guice.createInjector(new ConsumerModule(props, config))
 
     logger.info("Starting TSDB Consumer...")
@@ -62,7 +62,7 @@ object Main {
     argp.addOption("--backlog", "NUM","Size of connection attempt queue (default: 3072 or kernel" + " somaxconn.")
     argp.addOption("--flush-interval", "MSEC", "Maximum time for which a new data point can be buffered" + " (default: " + DEFAULT_FLUSH_INTERVAL + ").")
     CliOptions.addAutoMetricFlag(argp)
-    var temporaryArgs = CliOptions.parse(argp, file)
+    args = CliOptions.parse(argp, args)
     
 
 
