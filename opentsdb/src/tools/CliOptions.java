@@ -33,7 +33,7 @@ public final class CliOptions {
   }
 
   /** Adds common TSDB options to the given {@code argp}.  */
-  static void addCommon(final ArgP argp) {
+  public static void addCommon(final ArgP argp) {
     argp.addOption("--table", "TABLE",
                    "Name of the HBase table where to store the time series"
                    + " (default: tsdb).");
@@ -52,14 +52,14 @@ public final class CliOptions {
   }
 
   /** Adds a --verbose flag.  */
-  static void addVerbose(final ArgP argp) {
+  public static void addVerbose(final ArgP argp) {
     argp.addOption("--verbose",
                    "Print more logging messages and not just errors.");
     argp.addOption("-v", "Short for --verbose.");
   }
 
   /** Adds the --auto-metric flag.  */
-  static void addAutoMetricFlag(final ArgP argp) {
+  public static void addAutoMetricFlag(final ArgP argp) {
     argp.addOption("--auto-metric", "Automatically add metrics to tsdb as they"
                    + " are inserted.  Warning: this may cause unexpected"
                    + " metrics to be tracked");
@@ -72,7 +72,7 @@ public final class CliOptions {
    * @return The remainder of the command line or
    * {@code null} if {@code args} were invalid and couldn't be parsed.
    */
-  static String[] parse(final ArgP argp, String[] args) {
+  public static String[] parse(final ArgP argp, String[] args) {
     try {
       args = argp.parse(args);
     } catch (IllegalArgumentException e) {
@@ -91,7 +91,7 @@ public final class CliOptions {
    * @throws FileNotFoundException If the user provided config file was not found
    * @since 2.0
    */
-  static final Config getConfig(final ArgP argp) throws IOException {
+  public static final Config getConfig(final ArgP argp) throws IOException {
     // load configuration
     final Config config;
     final String config_file = argp.get("--config", "");
@@ -113,7 +113,7 @@ public final class CliOptions {
    * @param config Configuration instance to override
    * @since 2.0
    */
-  static void overloadConfig(final ArgP argp, final Config config) {
+  public static void overloadConfig(final ArgP argp, final Config config) {
 
     // loop and switch so we can map cli options to tsdb options
     for (Map.Entry<String, String> entry : argp.getParsed().entrySet()) {
