@@ -1,0 +1,180 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.radcheb</groupId>
+	<artifactId>twitter-kafka</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<name>${project.artifactId}</name>
+	<description>My wonderfull scala app</description>
+	<inceptionYear>2010</inceptionYear>
+
+	<properties>
+		<!-- <maven.compiler.source>1.5</maven.compiler.source> <maven.compiler.target>1.5</maven.compiler.target> -->
+		<encoding>UTF-8</encoding>
+		<scala.version>2.10.0</scala.version>
+		<scala.main>com.radcheb.App</scala.main>
+		<java.main>com.radcheb.twitterkafka.KafkaThreadProducer</java.main>
+	</properties>
+
+
+	<repositories>
+		<repository>
+			<id>scala-tools.org</id>
+			<name>Scala-Tools Maven2 Repository</name>
+			<url>http://scala-tools.org/repo-releases</url>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>scala-tools.org</id>
+			<name>Scala-Tools Maven2 Repository</name>
+			<url>http://scala-tools.org/repo-releases</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<dependencies>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>kafka_2.10</artifactId>
+			<version>0.8.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.scala-lang</groupId>
+			<artifactId>scala-library</artifactId>
+			<version>${scala.version}</version>
+		</dependency>
+
+		<!-- Test -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- <dependency> <groupId>org.scalatest</groupId> <artifactId>scalatest</artifactId> 
+			<version>1.2</version> <scope>test</scope> </dependency> -->
+		<dependency>
+			<groupId>org.twitter4j</groupId>
+			<artifactId>twitter4j-stream</artifactId>
+			<version>4.0.2</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>2.4</version>
+				</plugin>
+				<plugin>
+					<groupId>org.scala-tools</groupId>
+					<artifactId>maven-scala-plugin</artifactId>
+					<version>2.10.1</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.0</version>
+					<configuration>
+						<source>1.7</source>
+						<target>1.7</target>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<testSourceDirectory>src/test/java</testSourceDirectory>
+		<plugins>
+			<plugin>
+				<groupId>org.scala-tools</groupId>
+				<artifactId>maven-scala-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>${scala.main}</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+				<executions>
+					<execution>
+						<id>scala-compile-first</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>scala-test-compile</id>
+						<phase>process-test-resources</phase>
+						<goals>
+							<goal>testCompile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- A plugin to add excution parameters -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.4.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>java</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<mainClass>${java.main}</mainClass>
+					<!-- optional -->
+					<arguments>
+						<argument>1</argument>
+						<argument>test</argument>
+					</arguments>
+				</configuration>
+			</plugin>
+			<!-- The maven jar plugin to build a customized jar (add main in manifest) -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<!-- The main class -->
+							<mainClass>${java.main}</mainClass>
+							<addClasspath>true</addClasspath>
+							<classpathLayoutType>custom</classpathLayoutType>
+							<!-- required to use libraries -->
+							<customClasspathLayout>lib/$${artifact.artifactId}-$${artifact.version}$${dashClassifier?}.$${artifact.extension}
+							</customClasspathLayout>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			<!-- used to copy library files in the lib directory used in excution -->
+			<plugin>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<outputDirectory>${project.build.directory}/lib</outputDirectory>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
