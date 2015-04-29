@@ -82,33 +82,6 @@
     <sourceDirectory>src/main/java</sourceDirectory>
     <testSourceDirectory>src/test/java</testSourceDirectory>
     <plugins>
-      <plugin>
-        <groupId>org.scala-tools</groupId>
-        <artifactId>maven-scala-plugin</artifactId>
-        <configuration>
-          <archive>
-            <manifest>
-              <mainClass>${scala.main}</mainClass>
-            </manifest>
-          </archive>
-        </configuration>
-        <executions>
-          <execution>
-            <id>scala-compile-first</id>
-            <phase>process-resources</phase>
-              <goals>
-                <goal>compile</goal>
-              </goals>
-          </execution>
-          <execution>
-            <id>scala-test-compile</id>
-            <phase>process-test-resources</phase>
-              <goals>
-                <goal>testCompile</goal>
-              </goals>
-          </execution>
-        </executions>
-      </plugin>
 			<!-- A plugin to add excution parameters -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
@@ -122,12 +95,8 @@
             </execution>
           </executions>
           <configuration>
-            <mainClass>${java.main}</mainClass>
+            <mainClass>${java-main}</mainClass>
 					<!-- optional -->
-              <arguments>
-                <argument>1</argument>
-                <argument>test</argument>
-              </arguments>
           </configuration>
       </plugin>
 			<!-- The maven jar plugin to build a customized jar (add main in manifest) -->
@@ -138,7 +107,7 @@
             <archive>
               <manifest>
 							<!-- The main class -->
-                <mainClass>${java.main}</mainClass>
+                <mainClass>${java-main}</mainClass>
                 <addClasspath>true</addClasspath>
                 <classpathLayoutType>custom</classpathLayoutType>
 							<!-- required to use libraries -->
@@ -149,25 +118,23 @@
           </configuration>
       </plugin>
 			<!-- used to copy library files in the lib directory used in excution -->
-			<plugin>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<version>2.3</version>
-				<configuration>
-					<outputDirectory>${project.build.directory}/lib</outputDirectory>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>copy-dependencies</goal>
-						</goals>
-					</execution>
-				</executions>
+      <plugin>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>2.3</version>
+        <configuration>
+          <outputDirectory>${project.build.directory}/lib</outputDirectory>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
-  
-  
   
   
 </project>
