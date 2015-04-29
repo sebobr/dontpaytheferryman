@@ -1,5 +1,9 @@
 package com.core;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.Properties;
+
 public class KafkaParams {
 
 	public static final String BROKER_LIST = "metadata.broker.list";
@@ -13,8 +17,9 @@ public class KafkaParams {
 	public static final String KAFKA_TOPIC_VALUE = "tweets";
 	
 	public KafkaParams(String confFile) {
-		
-		
+		prop = new Properties();
+		InputStream is = new FileInputStream(confFile);
+		prop.load(is);
 		
 		
 		
