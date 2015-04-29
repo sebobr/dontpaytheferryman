@@ -20,15 +20,16 @@ public class KafkaProducer implements Runnable {
 
 	private InputStream inputStream = null;
 
-	public KafkaProducer(String topic, InputStream stream) {
-		this.topic = topic;
+	public KafkaProducer(KafkaParams params, InputStream stream) {
+		this.params = params;
 		this.inputStream = stream;
+		params.KAFKA_TOPIC_VALUE = topic;
 	}
 
 	public void run() {
 		Properties props = new Properties();
-		props.put(KafkaParams.BROKER_LIST, KafkaParams.BROKER_LIST_VALUE);
-		props.put(KafkaParams.SERIALIZER, KafkaParams.SERIALIZER_VALUE);
+		props.put(params.BROKER_LIST, params.BROKER_LIST_VALUE);
+		props.put(params.SERIALIZER, params.SERIALIZER_VALUE);
 		props.put("producer.type", "async");
 		ProducerConfig conf = new ProducerConfig(props);
 		Producer<Integer, String> producer = null;
