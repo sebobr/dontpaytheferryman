@@ -11,4 +11,17 @@ public class KafkaParams {
 	public static final String SERIALIZER_VALUE = "kafka.serializer.StringEncoder";
 	public static final String REQUIRED_ACKS_VALUE = "request.required.acks";
 	public static final String KAFKA_TOPIC_VALUE = "tweets";
+	
+	public KafkaParams(String confFile) {
+		
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+	
 }
