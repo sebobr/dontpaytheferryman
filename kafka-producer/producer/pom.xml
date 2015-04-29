@@ -12,7 +12,7 @@
   <properties>
     <maven.compile.source>1.7</maven.compile.source>
     <maven.compile.target>1.7</maven.compile.target>
-    <java-main>com.core.KafkaThreadProducer</java-main>
+    <java.main>com.core.KafkaThreadProducer</java.main>
     <scala-version>2.10.3</scala-version>
     <log4j-version>1.2.17</log4j-version>
     <kafka-version>0.8.2.1</kafka-version>
@@ -95,7 +95,7 @@
             </execution>
           </executions>
           <configuration>
-            <mainClass>${java-main}</mainClass>
+            <mainClass>${java.main}</mainClass>
 					<!-- optional -->
           </configuration>
       </plugin>
@@ -107,7 +107,7 @@
             <archive>
               <manifest>
 							<!-- The main class -->
-                <mainClass>${java-main}</mainClass>
+                <mainClass>${java.main}</mainClass>
                 <addClasspath>true</addClasspath>
                 <classpathLayoutType>custom</classpathLayoutType>
 							<!-- required to use libraries -->
