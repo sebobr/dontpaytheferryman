@@ -66,7 +66,7 @@ public class KafkaThreadProducer {
 			LOGGER.debug("Setting up file reader");
 			BufferedFileReader reader = new BufferedFileReader(filename, input);
 			LOGGER.debug("Setting up kafka producer");
-			KafkaParams confparams = new KafkaParams(confFile)
+			KafkaParams confparams = new KafkaParams(confFile);
 			KafkaProducer kafkaProducer = new KafkaProducer(confparams, send);
 
 			LOGGER.debug("Spinning up threads");
