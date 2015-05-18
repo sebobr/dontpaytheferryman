@@ -14,8 +14,9 @@ public class KafkaParams {
 	public String SERIALIZER_VALUE = "serializer_value";
 	public String REQUIRED_ACKS_VALUE = "required_acks_value";
 	public String KAFKA_TOPIC_VALUE = "kafka_topic_value";
+	public Properties prop;
 	
-	public KafkaParams(String confFile) {
+	public KafkaParams(String confFile) throws Exception {
 		prop = new Properties();
 		InputStream is = new FileInputStream(confFile);
 		prop.load(is);
