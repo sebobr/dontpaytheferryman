@@ -11,6 +11,7 @@ public class KafkaThreadProducer {
 	private static final Logger LOGGER = Logger
 			.getLogger(KafkaThreadProducer.class);
 	private static final int BUFFER_LEN = 4096;
+	public static KafkaParams confparams; 
 
 	public static void main(String[] args) {
 		if (args.length < 2)
@@ -35,7 +36,8 @@ public class KafkaThreadProducer {
 			LOGGER.debug("Setting up file reader");
 			BufferedTwitterReader reader = new BufferedTwitterReader( input);
 			LOGGER.debug("Setting up kafka producer");
-			KafkaParams confparams = new KafkaParams(confFile);
+			try { confparams = new KafkaParams(confFile);}
+				catch (Exception e) {}
 			KafkaProducer kafkaProducer = new KafkaProducer(confparams, send);
 
 			LOGGER.debug("Spinning up threads");
@@ -66,7 +68,8 @@ public class KafkaThreadProducer {
 			LOGGER.debug("Setting up file reader");
 			BufferedFileReader reader = new BufferedFileReader(filename, input);
 			LOGGER.debug("Setting up kafka producer");
-			KafkaParams confparams = new KafkaParams(confFile);
+			try { confparams = new KafkaParams(confFile);}
+				catch (Exception e) {}
 			KafkaProducer kafkaProducer = new KafkaProducer(confparams, send);
 
 			LOGGER.debug("Spinning up threads");

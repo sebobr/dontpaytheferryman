@@ -6,14 +6,14 @@ import java.util.Properties;
 
 public class KafkaParams {
 
-	public String BROKER_LIST = "broker_list";
-	public String SERIALIZER = "serializer";
-	public String REQUIRED_ACKS = "required_acks";
-	public String KAFKA_TOPIC = "kafka_topic";
-	public String BROKER_LIST_VALUE = "broker_list_value";
-	public String SERIALIZER_VALUE = "serializer_value";
-	public String REQUIRED_ACKS_VALUE = "required_acks_value";
-	public String KAFKA_TOPIC_VALUE = "kafka_topic_value";
+	public static final String BROKER_LIST = "broker_list";
+	public static final String SERIALIZER = "serializer";
+	public static final String REQUIRED_ACKS = "required_acks";
+	public static final String KAFKA_TOPIC = "kafka_topic";
+	public static final String BROKER_LIST_VALUE = "broker_list_value";
+	public static final String SERIALIZER_VALUE = "serializer_value";
+	public static final String REQUIRED_ACKS_VALUE = "required_acks_value";
+	public static final String KAFKA_TOPIC_VALUE = "kafka_topic_value";
 	public Properties prop;
 	
 	public KafkaParams(String confFile) throws Exception {

@@ -1,4 +1,4 @@
-package com.radcheb.twitterkafka;
+package com.core;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.BasicConfigurator;
@@ -11,21 +11,22 @@ public class KafkaThreadProducer {
 	private static final Logger LOGGER = Logger
 			.getLogger(KafkaThreadProducer.class);
 	private static final int BUFFER_LEN = 4096;
+	public KafkaParams confparams; 
 
 	public static void main(String[] args) {
-		if (args.length < 1)
+		if (args.length < 2)
 			throw new RuntimeException("Not enough arguments were passed");
 		BasicConfigurator.configure();
 		if (args[0].equals("0")) {
-			for (int i = 1; i < args.length; i++) {
-				produceForFile(args[i]);
+			for (int i = 1; i < (args.length - 1); i++) {
+				produceForFile(args[i], args[args.length - 1]);
 			}
 		} else {
-			produceFromTwitter();
+			produceFromTwitter(args[args.length - 1]);
 		}
 	}
 
-	private static void produceFromTwitter() {
+	private static void produceFromTwitter(String confFile) {
 		try {
 			LOGGER.debug("Setting up streams");
 			PipedInputStream send = new PipedInputStream();
@@ -35,8 +36,9 @@ public class KafkaThreadProducer {
 			LOGGER.debug("Setting up file reader");
 			BufferedTwitterReader reader = new BufferedTwitterReader( input);
 			LOGGER.debug("Setting up kafka producer");
-			KafkaProducer kafkaProducer = new KafkaProducer(
-					KafkaParams.KAFKA_TOPIC_VALUE, send);
+			try { confparams = new KafkaParams(confFile);}
+				catch (Exception e) {}
+			KafkaProducer kafkaProducer = new KafkaProducer(confparams, send);
 
 			LOGGER.debug("Spinning up threads");
 			Thread source = new Thread(reader);
@@ -56,7 +58,7 @@ public class KafkaThreadProducer {
 		}
 	}
 
-	private static void produceForFile(String filename) {
+	private static void produceForFile(String filename, String confFile) {
 		try {
 			LOGGER.debug("Setting up streams");
 			PipedInputStream send = new PipedInputStream(BUFFER_LEN);
@@ -66,8 +68,9 @@ public class KafkaThreadProducer {
 			LOGGER.debug("Setting up file reader");
 			BufferedFileReader reader = new BufferedFileReader(filename, input);
 			LOGGER.debug("Setting up kafka producer");
-			KafkaProducer kafkaProducer = new KafkaProducer(
-					KafkaParams.KAFKA_TOPIC_VALUE, send);
+			try { confparams = new KafkaParams(confFile);}
+				catch (Exception e) {}
+			KafkaProducer kafkaProducer = new KafkaProducer(confparams, send);
 
 			LOGGER.debug("Spinning up threads");
 			Thread source = new Thread(reader);
