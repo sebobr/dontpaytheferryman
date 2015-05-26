@@ -1,4 +1,4 @@
-package com.test.groups
+package com.kafkaconsumer.groups;
 
 import java.io.File;
 import java.io.OutputStream;
