@@ -15,11 +15,13 @@ public class ConsumerGroupExample {
     private final ConsumerConnector consumer;
     private final String topic;
     private  ExecutorService executor;
+    private LogWriter logw;
  
     public ConsumerGroupExample(String a_zookeeper, String a_groupId, String a_topic) {
         consumer = kafka.consumer.Consumer.createJavaConsumerConnector(
                 createConsumerConfig(a_zookeeper, a_groupId));
         this.topic = a_topic;
+        logw = new LogWriter("outputlogs.txt")
     }
  
     public void shutdown() {
@@ -48,7 +50,7 @@ public class ConsumerGroupExample {
         //
         int threadNumber = 0;
         for (final KafkaStream stream : streams) {
-            executor.submit(new ConsumerTest(stream, threadNumber));
+            executor.submit(new ConsumerTest(stream, threadNumber, logw));
             threadNumber++;
         }
     }
