@@ -1,4 +1,4 @@
-package com.test.groups;
+package com.kafkaconsumer.groups;
  
 import kafka.consumer.ConsumerIterator;
 import kafka.consumer.KafkaStream;
