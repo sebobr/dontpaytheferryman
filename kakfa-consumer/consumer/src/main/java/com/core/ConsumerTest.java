@@ -1,4 +1,7 @@
 package com.kafkaconsumer.groups;
+
+
+import org.apache.log4j.Logger;
  
 import kafka.consumer.ConsumerIterator;
 import kafka.consumer.KafkaStream;
@@ -7,6 +10,7 @@ import java.io.OutputStreamWriter;
 import java.io.IOException;
  
 public class ConsumerTest implements Runnable {
+    private static final Logger LOGGER = Logger.getLogger(ConsumerTest.class);
     private KafkaStream m_stream;
     private int m_threadNumber;
     private LogWriter logw;
