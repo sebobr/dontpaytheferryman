@@ -1,5 +1,8 @@
 package com.kafkaconsumer.groups;
 
+
+import org.apache.log4j.Logger;
+
 import java.io.File;
 import java.io.OutputStream;
 import java.io.Writer;
@@ -8,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
 
 public class LogWriter {
+  private static final Logger LOGGER = Logger.getLogger(LogWriter.class);
   private OutputStreamWriter osw;
   
   
