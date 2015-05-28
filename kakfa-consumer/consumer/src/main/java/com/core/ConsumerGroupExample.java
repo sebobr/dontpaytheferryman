@@ -1,4 +1,7 @@
 package com.kafkaconsumer.groups;
+
+
+import org.apache.log4j.Logger;
  
 import kafka.consumer.ConsumerConfig;
 import kafka.consumer.KafkaStream;
@@ -14,6 +17,7 @@ import java.io.OutputStreamWriter;
 import java.util.concurrent.TimeUnit;
  
 public class ConsumerGroupExample {
+   	private static final Logger LOGGER = Logger.getLogger(ConsumerGroupExample.class);
     private final ConsumerConnector consumer;
     private final String topic;
     private  ExecutorService executor;
