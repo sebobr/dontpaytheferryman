@@ -12,8 +12,14 @@ public class LogWriter {
   
   public LogWriter(String path) {
     File fout = new File(path);
+    
+    try {
 	  FileOutputStream fos = new FileOutputStream(fout);
- 	  osw = new OutputStreamWriter(fos);
+    } catch (FileNotFoundException e) {
+        
+        e.printStackTrace();
+    
+   osw = new OutputStreamWriter(fos);
   
   }
 
