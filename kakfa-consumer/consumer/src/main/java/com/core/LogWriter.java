@@ -17,7 +17,7 @@ public class LogWriter {
 	  FileOutputStream fos = new FileOutputStream(fout);
     } catch (FileNotFoundException e) {
         
-        e.printStackTrace();
+        e.printStackTrace(); }
     
    osw = new OutputStreamWriter(fos);
   
