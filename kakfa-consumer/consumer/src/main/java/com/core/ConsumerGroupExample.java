@@ -21,7 +21,7 @@ public class ConsumerGroupExample {
         consumer = kafka.consumer.Consumer.createJavaConsumerConnector(
                 createConsumerConfig(a_zookeeper, a_groupId));
         this.topic = a_topic;
-        logw = new LogWriter("outputlogs.txt")
+        logw = new LogWriter("outputlogs.txt");
     }
  
     public void shutdown() {
