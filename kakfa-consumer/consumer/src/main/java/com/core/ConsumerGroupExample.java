@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.io.OutputStreamWriter;
  
 public class ConsumerGroupExample {
     private final ConsumerConnector consumer;
