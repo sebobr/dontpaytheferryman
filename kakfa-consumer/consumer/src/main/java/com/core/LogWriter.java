@@ -16,11 +16,12 @@ public class LogWriter {
     
     try {
 	  FileOutputStream fos = new FileOutputStream(fout);
+	  osw = new OutputStreamWriter(fos);
     } catch (FileNotFoundException e) {
         
         e.printStackTrace(); }
     
-   osw = new OutputStreamWriter(fos);
+  
   
   }
 
