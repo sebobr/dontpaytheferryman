@@ -11,6 +11,7 @@ import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.io.OutputStreamWriter;
+import java.util.concurrent.TimeUnit;
  
 public class ConsumerGroupExample {
     private final ConsumerConnector consumer;
