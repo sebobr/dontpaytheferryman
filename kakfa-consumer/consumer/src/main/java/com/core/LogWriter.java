@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.OutputStream;
 import java.io.Writer;
 import java.io.OutputStreamWriter;
-import java.io.FileInputStream;
+import java.io.FileOutputStream;
 
 public class LogWriter {
   private OutputStreamWriter osw;
