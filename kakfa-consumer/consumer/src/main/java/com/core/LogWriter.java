@@ -3,6 +3,7 @@ package com.kafkaconsumer.groups;
 import java.io.File;
 import java.io.OutputStream;
 import java.io.Writer;
+import java.io.OutputStreamWriter;
 
 public class LogWriter {
   private OutputStreamWriter osw;
