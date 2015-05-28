@@ -5,6 +5,7 @@ import java.io.OutputStream;
 import java.io.Writer;
 import java.io.OutputStreamWriter;
 import java.io.FileOutputStream;
+import java.io.FileNotFoundException;
 
 public class LogWriter {
   private OutputStreamWriter osw;
