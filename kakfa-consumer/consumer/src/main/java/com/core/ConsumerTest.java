@@ -3,6 +3,7 @@ package com.kafkaconsumer.groups;
 import kafka.consumer.ConsumerIterator;
 import kafka.consumer.KafkaStream;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
  
 public class ConsumerTest implements Runnable {
     private KafkaStream m_stream;
