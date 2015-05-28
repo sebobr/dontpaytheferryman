@@ -4,6 +4,7 @@ import kafka.consumer.ConsumerIterator;
 import kafka.consumer.KafkaStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.IOException;
  
 public class ConsumerTest implements Runnable {
     private KafkaStream m_stream;
@@ -20,8 +21,13 @@ public class ConsumerTest implements Runnable {
  
     public void run() {
         ConsumerIterator<byte[], byte[]> it = m_stream.iterator();
-        while (it.hasNext())
-           osw.write(new String(it.next().message()));
+        while (it.hasNext()) {
+            try{
+        osw.write(new String(it.next().message()));
+          }
+        catch(IOException ex){}
+        }
+           
            // System.out.println("Thread " + m_threadNumber + ": " + new String(it.next().message()));
         System.out.println("Shutting down Thread: " + m_threadNumber);
     }
