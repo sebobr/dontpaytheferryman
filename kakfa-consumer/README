@@ -1,1 +1,1 @@
-O
+Multithreaded application able to read a topic from Kafka and putting it in an output file
