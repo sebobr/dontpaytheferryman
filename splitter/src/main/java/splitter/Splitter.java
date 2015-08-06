@@ -122,7 +122,7 @@ public class Splitter extends Configured implements Tool {
 			// for(int i =0; i< keys .length;i++){
 			// System.out.println("key "+i+": "+keys [i]);
 			// }
-
+			String timestamp = blocks[0];
 			int count = keys.length;
 			for (int i = 0; i < count; i++) {
 				String value = blocks[i + 5].substring(1,
@@ -131,7 +131,7 @@ public class Splitter extends Configured implements Tool {
 				System.out.println(key);
 				String type = key.split("\\^")[0];
 				String version = key.split("\\^")[1];
-				String path = type + "_" + version + ".csv";
+				String path = timestamp + type + "_" + version + ".csv";
 				this.path.set(path);
 				word.set(value);
 				System.out.println("value " + i + ": " + value);
