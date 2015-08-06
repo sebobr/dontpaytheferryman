@@ -126,7 +126,7 @@ public class Splitter extends Configured implements Tool {
 			int count = keys.length;
 			for (int i = 0; i < count; i++) {
 				String value = blocks[i + 5].substring(0,
-						blocks[i + 5].length() - 1);
+						blocks[i + 5].length());
 				String key = keys[i];
 				System.out.println(key);
 				String type = key.split("\\^")[0];
