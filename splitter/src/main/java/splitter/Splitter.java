@@ -131,7 +131,7 @@ public class Splitter extends Configured implements Tool {
 				System.out.println(key);
 				String type = key.split("\\^")[0];
 				String version = key.split("\\^")[1];
-				String path = timestamp + type + "_" + version + ".csv";
+				String path = timestamp + "/" + type + "_" + version + ".csv";
 				this.path.set(path);
 				word.set(value);
 				System.out.println("value " + i + ": " + value);
